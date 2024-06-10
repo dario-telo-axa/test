@@ -1,0 +1,42 @@
+# GAR Pattern - Model call with information retrieval (RAG) 
+
+This pattern is part of the Application Patterns for XX collection in the Generative AI domain.
+This pattern is referenced in the XX domain definition page under the scope of Generative AI.
+
+
+## Context
+
+Creation of Generative Ai based applications that must rely on Large Language Models for response quality (fluency) but that rely on internal business knowledge and document for contents (response relevance). 
+The way the application exchanges with the model is deterministic (via a predefined workflow: models' interactions will always follow the same “request/response pattern”).
+
+## Problem addressed
+
+A business application needs a human-like answer quality (fluency)  to address user queries with heterogeneous formulations. The model does not have the correct knowledge to correctly answer the user question (response relevance) therefore the answer context must be provided by a proprietary/ custom document corpus and knowledge base.
+
+## Strength
+
+the pattern is useful when the content to address the generative task is heavily linked to the business knowledge of the enterprise. It is less relevant for task whose required knowledge is external to the enterprise (such as code generation) 
+
+## Pattern nature
+
+On-line/Real Time
+
+## Solution
+
+The application has a standard workflow that interacts with the model. Answer specific domain related questions providing supplementary knowledge to an existing model that enhances/replaces its internal training driven knowledge base.
+
+## Related papers 
+
+[Link](https://arxiv.org/pdf/2005.11401.pdf)
+
+## Pattern blueprint 
+
+![Pattern1B](file:///C:/Users/sahar.kiameh/OneDrive%20-%20Accenture/Desktop/AXA/AXA%20GO%20-%20GenAI/Markdown/Blueprints/Pattern1B.png)
+
+## Components
+
+GenAI Response Model Handler: 
+- Scope: The response handler is responsible to interact with the Vector DB in the process of information retrieval (see pattern 2). The vector DB contains the knowledge base for the query and is loaded asynchronously (see pattern 3) 
+- Input: Prompt data created from the user query from the input handler
+- Output : Full prompt enriched with retrieved content to provide the answer context to the LLM (see pattern 2 for details on RAG techniques)
+- Possible technologies: (Possible solution) Python, JavaScript via LangChain frameworks
